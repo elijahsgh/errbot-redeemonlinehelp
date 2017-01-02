@@ -73,16 +73,17 @@ class RedeemOnlineHelp(BotPlugin):
 
     @botcmd
     def gcode(self, msg, args):
+        """Request gcode lookup from Redeem documentation."""
         if not self.redeem_path or self.redeem_load_error:
             return "Sorry, but the redeem path is not configured correctly."
 
         if not len(args):
             msg = (", ").join(self.gcodes.keys())
-            return "(RedeemOnlineHelp) gcode help: " + msg
+            return "(RedeemOnlineHelp) gcode help: {}".format(msg)
 
         if args.lower() in self.gcodes:
-            reply = "{code}: {desc}".format(
+            reply = "(RedeemOnlineHelp) {code}: {desc}".format(
                 code=args.lower(),
                 desc=self.gcodes[args.lower()]['desc']
             )
-            return "(RedeemOnlineHelp) " + reply
+            return reply
